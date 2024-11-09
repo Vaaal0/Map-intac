@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .marker {
+            background-color: rgb(225, 191, 251);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .floating-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgb(255, 255, 255);
+            padding: 10px;
+            font-family: "Quicksand", sans-serif;
+            color: #550d39;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        /* Estilo para el popup */
+        .mapboxgl-popup {
+            max-width: none; /* Permitir que el popup se ajuste al contenido */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <!-- Floating label -->
+    <div class="floating-label" onclick="window.open('index.html', '_blank')">
+        Archive
+    </div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoidmFhYWxhZ3VpbCIsImEiOiJjbGo2NzhpMjYwZnZmM3FreG1hOWNxMXlrIn0.P0SKixxpDVbWAa9zrCSutg';
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/vaaalaguil/cm3ajgnly01ns01pd0q0aec83',
+            projection: 'globe', // Display the map as a globe
+            zoom: 2,
+            center: [-167.255670, 36.574597]
+        });
+
+        map.addControl(new mapboxgl.NavigationControl());
+
+        const markers = [
+            {
+                coordinates: [-99.127960, 19.423959], // México
+                title: 'Mexico',
+                videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
+                link: 'https://vaaal0.github.io/Historias/'
+            },
+            {
+                coordinates: [139.767258, 35.679968], // Japón
+                title: 'Japan',
+                videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
+                link: 'https://example.com/el-solovino'
+            },
+            {
+                coordinates: [-75.690970, 45.428511], // Canadá
+                title: 'Canada',
+                videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
+                link: 'https://example.com/el-guero'
+            },
+        ];
+
+        const coordinates = markers.map(marker => marker.coordinates);
+
+        // Agregar la línea al mapa usando GeoJSON
+        map.on('load', () => {
+            // Agregar la fuente de la línea
+            map.addSource('line', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'LineString',
+                        // Ajustar las coordenadas para que pasen sobre el océano
+                        'coordinates': [
+                            [-99.127960, 19.423959], // México
+                            [-70, 20],               // Punto intermedio en el océano
+                            [139.767258, 35.679968], // Japón
+                            [-75.690970, 45.428511]   // Canadá (opcional)
+                        ]
+                    }
+                }
+            });
+
+            // Agregar la capa de la línea
+            map.addLayer({
+                'id': 'line',
+                'type': 'line',
+                'source': 'line',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': '#888',
+                    'line-width': 8
+                }
+            });
+
+            // Agregar marcadores para cada punto
+            markers.forEach(marker => {
+                const el = document.createElement('div');
+                el.className = 'marker';
+
+                const popupContent = `<h3>${marker.title}</h3>
+                    <video width="300" controls>
+                        <source src="${marker.videoUrl}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <a href="${marker.link}" target="_blank">More Info</a>`;
+
+                new mapboxgl.Marker(el)
+                    .setLngLat(marker.coordinates)
+                    .setPopup(new mapboxgl.Popup({ offset: 10 }).setHTML(popupContent))
+                    .addTo(map);
+            });
+        });
+    </script>
+</body>
+
+</html>
