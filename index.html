@@ -64,29 +64,23 @@
             style: 'mapbox://styles/vaaalaguil/cm3ajgnly01ns01pd0q0aec83',
             projection: 'globe', // Display the map as a globe
             zoom: 2,
-            center: [-167.255670, 36.574597]
+            center: [-90, 40] // Centrar en América del Norte
         });
 
         map.addControl(new mapboxgl.NavigationControl());
 
         const markers = [
             {
-                coordinates: [-99.127960, 19.423959], // México
-                title: 'Mexico',
+                coordinates: [-99.133208, 19.432608], // Ciudad de México
+                title: 'Mexico City',
                 videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
                 link: 'https://vaaal0.github.io/Historias/'
             },
             {
-                coordinates: [139.767258, 35.679968], // Japón
-                title: 'Japan',
+                coordinates: [-75.697193, 45.421530], // Ottawa
+                title: 'Ottawa',
                 videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
                 link: 'https://example.com/el-solovino'
-            },
-            {
-                coordinates: [-75.690970, 45.428511], // Canadá
-                title: 'Canada',
-                videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
-                link: 'https://example.com/el-guero'
             },
         ];
 
@@ -103,10 +97,9 @@
                         'type': 'LineString',
                         // Ajustar las coordenadas para que pasen sobre el océano
                         'coordinates': [
-                            [-99.127960, 19.423959], // México
-                            [-70, 20],               // Punto intermedio en el océano
-                            [139.767258, 35.679968], // Japón
-                            [-75.690970, 45.428511]   // Canadá (opcional)
+                            [-99.133208, 19.432608], // Ciudad de México
+                            [139.767258, 35.679968],// Punto intermedio en el océano
+                            [-75.697193, 45.421530]   // Ottawa
                         ]
                     }
                 }
@@ -122,8 +115,8 @@
                     'line-cap': 'round'
                 },
                 'paint': {
-                    'line-color': '#888',
-                    'line-width': 8
+                    'line-color': '#550d39', // Color de la línea
+                    'line-width': 2          // Ancho de la línea
                 }
             });
 
@@ -133,7 +126,7 @@
                 el.className = 'marker';
 
                 const popupContent = `<h3>${marker.title}</h3>
-                    <video width="300" controls>
+                    <video width="200" controls>
                         <source src="${marker.videoUrl}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
