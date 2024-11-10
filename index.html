@@ -64,7 +64,7 @@
             style: 'mapbox://styles/vaaalaguil/cm3ajgnly01ns01pd0q0aec83',
             projection: 'globe', // Display the map as a globe
             zoom: 2,
-            center: [-90, 40] // Centrar en América del Norte
+            center: [-161.215816, 49.069318] // Centrar en América del Norte
         });
 
         map.addControl(new mapboxgl.NavigationControl());
@@ -75,6 +75,12 @@
                 title: 'Mexico City',
                 videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
                 link: 'https://vaaal0.github.io/Historias/'
+            },
+            {
+                coordinates: [139.767258, 35.679968], // Japón
+                title: 'Japan',
+                videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
+                //link: 'https://example.com/el-solovino'
             },
             {
                 coordinates: [-75.697193, 45.421530], // Ottawa
@@ -130,7 +136,7 @@
                         <source src="${marker.videoUrl}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <a href="${marker.link}" target="_blank">More Info</a>`;
+                    `;
 
                 new mapboxgl.Marker(el)
                     .setLngLat(marker.coordinates)
