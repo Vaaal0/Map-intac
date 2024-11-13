@@ -4,119 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map</title>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
+    <title>Archive</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap" rel="stylesheet">
 
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
 
-        .marker {
-            background-color: rgb(157, 53, 238);
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .floating-label {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: rgb(255, 255, 255);
-            padding: 10px;
-            font-family: "Quicksand", sans-serif;
-            color: #550d39;
-            font-size: 1.5rem;
-            border-radius: 5px;
-            z-index: 1;
-        }
-
-        /* Estilo para el popup */
-        .mapboxgl-popup {
-            max-width: none; /* Permitir que el popup se ajuste al contenido */
-        }
-
-        /* Estilo para el indicador de carga */
-        .loading-indicator {
-            display: none; /* Oculto por defecto */
-            text-align: center;
-            margin-top: 10px;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="map"></div>
 
-    <!-- Floating label -->
-    <div class="floating-label" onclick="window.open('index.html', '_blank')">
-        Archive
-    </div>
+    <header>
+        <div class="start">
+            <h1 class="bowlby-one-regular">Archive</h1>
+            <!--<video controls autoplay src="https://youtu.be/vj-6wHANOys"></video>-->
+            <a href="map.html" class="button">Start</a>
+        </div>
+    </header>
 
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoidmFhYWxhZ3VpbCIsImEiOiJjbGo2NzhpMjYwZnZmM3FreG1hOWNxMXlrIn0.P0SKixxpDVbWAa9zrCSutg';
+    <nav>
+        <ul>
+            <li> <a href="#">Home</a></li>
+            <li> <a href="#Gallery">Map</a></li>
+            <li> <a href="#">Credits</a></li>
+        </ul>
+    </nav>
 
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/vaaalaguil/cm3ajgnly01ns01pd0q0aec83',
-            projection: 'globe', // Display the map as a globe
-            zoom: 2,
-            center: [-161.215816, 49.069318] // Centrar en América del Norte
-        });
+    <!-- <section id="about">
+        <div class="info">
+            <h3>About</h3>
+            <p>
+                information of the project?
+            </p>
+        </div>
 
-        map.addControl(new mapboxgl.NavigationControl());
+    </section>-->
 
-        const markers = [
-            {
-                coordinates: [-99.656824, 19.278533], // Ciudad de México
-                title: 'Toluca, Mexico',
-                videoUrl: 'https://www.dropbox.com/https://www.dropbox.com/scl/fi/0k2ainh3inrns7kztdjhx/20241028_155512.mp4?rlkey=7ch5rlugrmb1caxmx484n5d81&st=6m0dvdwg&dl=0scl/fi/nr55l44om40mz42z33hpq/20241031_232414-2.mp4?rlkey=nz46qlr4wzh45i95332ccxmur&st=jzg9y5x9&dl=1',
-                //link: 'https://vaaal0.github.io/Historias/'
-            },
-            {
-                coordinates: [130.351745, 33.592697], // Japón
-                title: 'Fukuoka, Japan',
-                videoUrl: 'https://www.dropbox.com/scl/fi/fyutvvb895ybrc61zhbvf/c0a983e9-b4f0-4e0d-81bc-d65cadb25e9b.mp4?rlkey=l04klg05f3a8xfej03u4a76ap&st=e1fec4ou&dl=0',
-                //link: 'https://example.com/el-solovino'
-            },
-            {
-                coordinates: [-79.384518, 43.649600], // Toronto
-                title: 'Toronto, Canada',
-                videoUrl: 'https://www.dropbox.com/scl/fi/i3wvpawvoe30lw6w0yfg8/DSCF0005.MP4?rlkey=96ys4c9j6ze58imuplq1ooig4&st=cxgd134c&dl=0',
-                //link: 'https://example.com/el-solovino'
-            },
-        ];
 
-        // Agregar marcadores para cada punto
-        markers.forEach(marker => {
-            const el = document.createElement('div');
-            el.className = 'marker';
-
-            const popupContent = `
-                <h3>${marker.title}</h3>
-                <div class="loading-indicator">Loading...</div>
-                <video width="200" controls onloadstart="this.previousElementSibling.style.display='block';" onloadeddata="this.previousElementSibling.style.display='none';">
-                    <source src="${marker.videoUrl}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            `;
-
-            new mapboxgl.Marker(el)
-                .setLngLat(marker.coordinates)
-                .setPopup(new mapboxgl.Popup({ offset: 10 }).setHTML(popupContent))
-                .addTo(map);
-        });
-    </script>
 </body>
 
 </html>

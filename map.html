@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .marker {
+            background-color: rgb(157, 53, 238);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .floating-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgb(255, 255, 255);
+            padding: 10px;
+            font-family: "Quicksand", sans-serif;
+            color: #550d39;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        /* Estilo para el popup */
+        .mapboxgl-popup {
+            max-width: none;
+            /* Permitir que el popup se ajuste al contenido */
+        }
+
+        /* Estilo para el indicador de carga */
+        .loading-indicator {
+            display: none;
+            /* Oculto por defecto */
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <!-- Floating label -->
+    <div class="floating-label" onclick="window.open('index.html', '_blank')">
+        Archive
+    </div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoidmFhYWxhZ3VpbCIsImEiOiJjbGo2NzhpMjYwZnZmM3FreG1hOWNxMXlrIn0.P0SKixxpDVbWAa9zrCSutg';
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/vaaalaguil/cm3ajgnly01ns01pd0q0aec83',
+            projection: 'globe', // Display the map as a globe
+            zoom: 2,
+            center: [-161.215816, 49.069318] // Centrar en América del Norte
+        });
+
+        map.addControl(new mapboxgl.NavigationControl());
+
+        const markers = [
+            {
+                coordinates: [-99.656824, 19.278533],
+                title: 'Toluca, Mexico',
+                videoUrl: 'https://www.dropbox.com/scl/fi/0k2ainh3inrns7kztdjhx/20241028_155512.mp4?rlkey=7ch5rlugrmb1caxmx484n5d81&st=6m0dvdwg&dl=1',
+            },
+            {
+                coordinates: [130.351745, 33.592697],
+                title: 'Fukuoka, Japan',
+                videoUrl: 'https://www.dropbox.com/scl/fi/1xq3okjh8h3ikn5hchvt4/20241021_161649-1.mp4?rlkey=43tcfz5tm6547jojysg0bcg1i&st=dp5beuxa&dl=1',
+            },
+            {
+                coordinates: [-79.384518, 43.649600],
+                title: 'Toronto, Canada',
+                videoUrl: 'https://www.dropbox.com/scl/fi/i3wvpawvoe30lw6w0yfg8/DSCF0005.MP4?rlkey=96ys4c9j6ze58imuplq1ooig4&st=cxgd134c&dl=1',
+            },
+        ];
+
+        // Agregar marcadores para cada punto
+        markers.forEach(marker => {
+            const el = document.createElement('div');
+            el.className = 'marker';
+
+            const popupContent = `
+                <h3>${marker.title}</h3>
+                <div class="loading-indicator">Loading...</div>
+                <video width="200" controls onloadstart="this.previousElementSibling.style.display='block';" onloadeddata="this.previousElementSibling.style.display='none';">
+                    <source src="${marker.videoUrl}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+
+            new mapboxgl.Marker(el)
+                .setLngLat(marker.coordinates)
+                .setPopup(new mapboxgl.Popup({ offset: 10 }).setHTML(popupContent))
+                .addTo(map);
+        });
+    </script>
+</body>
+
+</html>
