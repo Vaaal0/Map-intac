@@ -21,13 +21,12 @@
         }
 
         .marker {
-            background-color: rgb(225, 191, 251);
+            background-color: rgb(157, 53, 238);
             width: 15px;
             height: 15px;
             border-radius: 50%;
             cursor: pointer;
         }
-
         .floating-label {
             position: absolute;
             top: 20px;
@@ -40,7 +39,6 @@
             border-radius: 5px;
             z-index: 1;
         }
-
         /* Estilo para el popup */
         .mapboxgl-popup {
             max-width: none; /* Permitir que el popup se ajuste al contenido */
@@ -71,22 +69,22 @@
 
         const markers = [
             {
-                coordinates: [-99.133208, 19.432608], // Ciudad de México
-                title: 'Mexico City',
-                videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
-                link: 'https://vaaal0.github.io/Historias/'
+                coordinates: [-99.656824, 19.278533], // Ciudad de México
+                title: 'Toluca, Mexico',
+                videoUrl: 'https://www.dropbox.com/scl/fi/nr55l44om40mz42z33hpq/20241031_232414-2.mp4?rlkey=nz46qlr4wzh45i95332ccxmur&st=jzg9y5x9&dl=0',
+                //link: 'https://vaaal0.github.io/Historias/'
             },
             {
-                coordinates: [139.767258, 35.679968], // Japón
-                title: 'Japan',
-                videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
+                coordinates: [130.351745, 33.592697], // Japón
+                title: 'Fukuoka, Japan',
+                videoUrl: 'https://www.dropbox.com/scl/fi/6sv0yeksij1ecfbxzxk0h/20241021_163009.mp4?rlkey=4e75la6fro744hf1lrd2zbyes&st=j6smloxr&dl=0',
                 //link: 'https://example.com/el-solovino'
             },
             {
-                coordinates: [-75.697193, 45.421530], // Ottawa
-                title: 'Ottawa',
-                videoUrl: 'https://www.dropbox.com/scl/fi/at9iper4gqbhan9obxzak/20241021_164926_1.mp4?rlkey=jzxqxunanmqisueh5e1k0auu1&dl=1',
-                link: 'https://example.com/el-solovino'
+                coordinates: [-79.384518, 43.649600], // Ottawa
+                title: 'Toronto, Canada',
+                videoUrl: 'https://www.dropbox.com/scl/fi/0avdvrlanj0jlc2q6iybd/DSCF1032.MP4?rlkey=afl3n0d37bau63xp1y0jvhwu7&st=1mt51dwa&dl=0',
+                //link: 'https://example.com/el-solovino'
             },
         ];
 
@@ -103,26 +101,11 @@
                         'type': 'LineString',
                         // Ajustar las coordenadas para que pasen sobre el océano
                         'coordinates': [
-                            [-99.133208, 19.432608], // Ciudad de México
-                            [139.767258, 35.679968],// Punto intermedio en el océano
-                            [-75.697193, 45.421530]   // Ottawa
+                            [-99.656824, 19.278533], // Ciudad de México
+                            [130.351745, 33.592697],// Punto intermedio en el océano
+                            [-79.384518, 43.649600]   // Ottawa
                         ]
                     }
-                }
-            });
-
-            // Agregar la capa de la línea
-            map.addLayer({
-                'id': 'line',
-                'type': 'line',
-                'source': 'line',
-                'layout': {
-                    'line-join': 'round',
-                    'line-cap': 'round'
-                },
-                'paint': {
-                    'line-color': '#550d39', // Color de la línea
-                    'line-width': 2          // Ancho de la línea
                 }
             });
 
