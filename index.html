@@ -27,6 +27,7 @@
             border-radius: 50%;
             cursor: pointer;
         }
+
         .floating-label {
             position: absolute;
             top: 20px;
@@ -39,9 +40,17 @@
             border-radius: 5px;
             z-index: 1;
         }
+
         /* Estilo para el popup */
         .mapboxgl-popup {
             max-width: none; /* Permitir que el popup se ajuste al contenido */
+        }
+
+        /* Estilo para el indicador de carga */
+        .loading-indicator {
+            display: none; /* Oculto por defecto */
+            text-align: center;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -71,61 +80,41 @@
             {
                 coordinates: [-99.656824, 19.278533], // Ciudad de México
                 title: 'Toluca, Mexico',
-                videoUrl: 'https://www.dropbox.com/scl/fi/nr55l44om40mz42z33hpq/20241031_232414-2.mp4?rlkey=nz46qlr4wzh45i95332ccxmur&st=jzg9y5x9&dl=0',
+                videoUrl: 'https://www.dropbox.com/https://www.dropbox.com/scl/fi/0k2ainh3inrns7kztdjhx/20241028_155512.mp4?rlkey=7ch5rlugrmb1caxmx484n5d81&st=6m0dvdwg&dl=0scl/fi/nr55l44om40mz42z33hpq/20241031_232414-2.mp4?rlkey=nz46qlr4wzh45i95332ccxmur&st=jzg9y5x9&dl=1',
                 //link: 'https://vaaal0.github.io/Historias/'
             },
             {
                 coordinates: [130.351745, 33.592697], // Japón
                 title: 'Fukuoka, Japan',
-                videoUrl: 'https://www.dropbox.com/scl/fi/6sv0yeksij1ecfbxzxk0h/20241021_163009.mp4?rlkey=4e75la6fro744hf1lrd2zbyes&st=j6smloxr&dl=0',
+                videoUrl: 'https://www.dropbox.com/scl/fi/fyutvvb895ybrc61zhbvf/c0a983e9-b4f0-4e0d-81bc-d65cadb25e9b.mp4?rlkey=l04klg05f3a8xfej03u4a76ap&st=e1fec4ou&dl=0',
                 //link: 'https://example.com/el-solovino'
             },
             {
-                coordinates: [-79.384518, 43.649600], // Ottawa
+                coordinates: [-79.384518, 43.649600], // Toronto
                 title: 'Toronto, Canada',
-                videoUrl: 'https://www.dropbox.com/scl/fi/0avdvrlanj0jlc2q6iybd/DSCF1032.MP4?rlkey=afl3n0d37bau63xp1y0jvhwu7&st=1mt51dwa&dl=0',
+                videoUrl: 'https://www.dropbox.com/scl/fi/i3wvpawvoe30lw6w0yfg8/DSCF0005.MP4?rlkey=96ys4c9j6ze58imuplq1ooig4&st=cxgd134c&dl=0',
                 //link: 'https://example.com/el-solovino'
             },
         ];
 
-        const coordinates = markers.map(marker => marker.coordinates);
+        // Agregar marcadores para cada punto
+        markers.forEach(marker => {
+            const el = document.createElement('div');
+            el.className = 'marker';
 
-        // Agregar la línea al mapa usando GeoJSON
-        map.on('load', () => {
-            // Agregar la fuente de la línea
-            map.addSource('line', {
-                'type': 'geojson',
-                'data': {
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'LineString',
-                        // Ajustar las coordenadas para que pasen sobre el océano
-                        'coordinates': [
-                            [-99.656824, 19.278533], // Ciudad de México
-                            [130.351745, 33.592697],// Punto intermedio en el océano
-                            [-79.384518, 43.649600]   // Ottawa
-                        ]
-                    }
-                }
-            });
+            const popupContent = `
+                <h3>${marker.title}</h3>
+                <div class="loading-indicator">Loading...</div>
+                <video width="200" controls onloadstart="this.previousElementSibling.style.display='block';" onloadeddata="this.previousElementSibling.style.display='none';">
+                    <source src="${marker.videoUrl}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
 
-            // Agregar marcadores para cada punto
-            markers.forEach(marker => {
-                const el = document.createElement('div');
-                el.className = 'marker';
-
-                const popupContent = `<h3>${marker.title}</h3>
-                    <video width="200" controls>
-                        <source src="${marker.videoUrl}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    `;
-
-                new mapboxgl.Marker(el)
-                    .setLngLat(marker.coordinates)
-                    .setPopup(new mapboxgl.Popup({ offset: 10 }).setHTML(popupContent))
-                    .addTo(map);
-            });
+            new mapboxgl.Marker(el)
+                .setLngLat(marker.coordinates)
+                .setPopup(new mapboxgl.Popup({ offset: 10 }).setHTML(popupContent))
+                .addTo(map);
         });
     </script>
 </body>
