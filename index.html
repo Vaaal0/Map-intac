@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive</title>
-    <link href="styles/style.css" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
+    <link href="styles/style.css" rel="stylesheet" type="text/css" />
 
 
 </head>
@@ -16,11 +18,19 @@
 <body>
 
     <header>
+        <h1 class="bowlby-one-regular">Closed-Ears</h1>
         <div class="start">
-            <h1 class="bowlby-one-regular">Archive</h1>
+            <video controls width="600">
+                <source
+                    src="https://www.dropbox.com/scl/fi/vclqc09c8c5wfish6vof3/1.mp4?rlkey=h0h0enfhuo4bco0ebu3x1o46k&st=4arzkwey&dl=1"
+                    type="video/mp4">
+                Tu navegador no soporta la reproducción de videos.
+            </video>
+
             <!--<video controls autoplay src="https://youtu.be/vj-6wHANOys"></video>-->
-            <a href="map.html" class="button">Start</a>
+
         </div>
+        <a href="#map" class="button">Start</a>
     </header>
 
     <nav>
@@ -30,17 +40,165 @@
             <li> <a href="#">Credits</a></li>
         </ul>
     </nav>
-
-    <!-- <section id="about">
-        <div class="info">
-            <h3>About</h3>
-            <p>
-                information of the project?
-            </p>
+    <div class="info">
+        <h3>About</h3>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis voluptatem excepturi quas mollitia,
+            perspiciatis enim explicabo natus molestiae deleniti porro commodi nesciunt eum asperiores, laboriosam a rem
+            itaque! Similique, nostrum!
+        </p>
+    </div>
+    <div id="map">
+        <div id="carousel" class="carousel">
+            <div class="slides">
+                <div class="slide">
+                    <video autoplay muted loop>
+                        <source src="https://www.dropbox.com/scl/fi/0k2ainh3inrns7kztdjhx/20241028_155512.mp4?dl=1"
+                            type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                </div>
+                <div class="slide">
+                    <video autoplay muted loop>
+                        <source src="https://www.dropbox.com/scl/fi/1xq3okjh8h3ikn5hchvt4/20241021_161649-1.mp4?dl=1"
+                            type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                </div>
+                <div class="slide">
+                    <video autoplay muted loop>
+                        <source src="https://www.dropbox.com/scl/fi/ug4ddp9ny02ci7lp1g0qc/DSCF1030.MP4?dl=1"
+                            type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                </div>
+            </div>
         </div>
 
-    </section>-->
+    </div>
 
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoidmFhYWxhZ3VpbCIsImEiOiJjbGo2NzhpMjYwZnZmM3FreG1hOWNxMXlrIn0.P0SKixxpDVbWAa9zrCSutg';
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/vaaalaguil/cm3ajgnly01ns01pd0q0aec83',
+            projection: 'globe',
+            zoom: 2,
+            center: [-161.215816, 49.069318] // Centrar en América del Norte
+        });
+
+        map.addControl(new mapboxgl.NavigationControl());
+        map.scrollZoom.disable();
+
+        map.on('style.load', () => {
+            map.setFog({});
+        });
+
+        const markers = [
+            {
+                coordinates: [-99.656824, 19.278533],
+                title: 'Toluca, Mexico',
+                videos: [
+                    'https://www.dropbox.com/scl/fi/dam00ejf78odl236pm3ay/20241031_201120.mp4?rlkey=c509tpktrctqt20tisbu8imk9&st=1owuj8pw&dl=1',
+                    'https://www.dropbox.com/scl/fi/nr55l44om40mz42z33hpq/20241031_232414-2.mp4?rlkey=nz46qlr4wzh45i95332ccxmur&st=jokdzepz&dl=1'
+                ]
+            },
+            {
+                coordinates: [130.351745, 33.592697],
+                title: 'Fukuoka, Japan',
+                videos: [
+                    'https://www.dropbox.com/scl/fi/8g5b4bg0wrzfak2zz4s6r/e425de7e-d408-4794-b345-c3ffb177cb4b.mp4?rlkey=ntccyx9g8fg12yxfjqvfu9ony&st=4qjsgb5l&dl=1',
+                    'https://www.dropbox.com/scl/fi/ahz5hhdoc6144tfk3a331/IMG_3945.mp4?rlkey=g9vb0f7k334h3tttq0vow3ie4&st=brr402h9&dl=1',
+                    'https://www.dropbox.com/scl/fi/fyutvvb895ybrc61zhbvf/c0a983e9-b4f0-4e0d-81bc-d65cadb25e9b.mp4?rlkey=l04klg05f3a8xfej03u4a76ap&st=iv2yrzgd&dl=1'
+                ]
+            },
+            {
+                coordinates: [-79.384518, 43.649600], // Coordenadas de Toronto
+                title: 'Toronto, Canada',
+                videos: [
+                    'https://www.dropbox.com/scl/fi/2cqsta1kfcgs5i82wq6do/couldnt-stabilize-more-TT.mp4?rlkey=8vc4dtmtcu3h047xgi1ynjvv8&st=89maraob&dl=1',
+                    'https://www.dropbox.com/scl/fi/zqi9pbqi8hnr3ev3z84pg/carride-stabilized.mp4?raw=1'
+                ]
+            }
+
+
+        ];
+
+        // Función para generar el HTML del carrusel
+        function createCarousel(videos) {
+            let carouselHTML = `
+            <div class="carousel">
+                <div class="slides">
+            `;
+            videos.forEach((video, index) => {
+                carouselHTML += `
+                    <div class="slide ${index === 0 ? 'active' : ''}">
+                        <video controls  muted loop>
+                            <source src="${video}" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                    </div>
+                `;
+            });
+            carouselHTML += `
+                </div>
+                <div class="carousel-controls">
+                    <button class="prev">←</button>
+                    <button class="next">→</button>
+                </div>
+            </div>`;
+            return carouselHTML;
+        }
+
+        // Función para inicializar la lógica del carrusel
+        function initCarousel(popupElement) {
+            const slides = popupElement.querySelectorAll('.slide');
+            const prevButton = popupElement.querySelector('.prev');
+            const nextButton = popupElement.querySelector('.next');
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showSlide(currentIndex);
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            });
+        }
+
+        // Agregar marcadores con popups que contienen el carrusel
+        markers.forEach(marker => {
+            const popupContent = `
+                <h3>${marker.title}</h3>
+                ${createCarousel(marker.videos)}
+            `;
+            const popup = new mapboxgl.Popup({ offset: 10 })
+                .setHTML(popupContent);
+
+            const el = document.createElement('div');
+            el.className = 'marker';
+
+            new mapboxgl.Marker(el)
+                .setLngLat(marker.coordinates)
+                .setPopup(popup)
+                .addTo(map);
+
+            // Iniciar carrusel cuando se abre el popup
+            popup.on('open', () => {
+                const popupElement = document.querySelector('.mapboxgl-popup-content');
+                initCarousel(popupElement);
+            });
+        });
+    </script>
 
 </body>
 

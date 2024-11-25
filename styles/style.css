@@ -1,3 +1,8 @@
+*,*::before,::after,html{
+  box-sizing: border-box!important;
+  margin: 0;
+  padding: 0;
+}
 html{
     scroll-behavior: smooth;
     behavior: calc(smooth);
@@ -7,26 +12,46 @@ body{
     margin: 0;
     padding: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: #0C0D21;
-    color: #ffffff;
+    background-color: #04162A;
+    position: relative;
+    width: 100vw;
+    overflow-x: hidden;
 }
+
 header{
     height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
 }
 
 .bowlby-one-regular {
     font-family: "Bowlby One", sans-serif;
-    font-weight: 300;
+    font-weight: 500;
     font-style: normal;
     margin-bottom: 5px;
+    color: #ffffff;
+    font-size: 300%;
 }
 
 .start{
+    width: 60%;
+    height: 70%;
     padding: 10px;
-    position:relative ;
+    position: relative;
     text-align: center;
-    top: 40vh;
     font-size: 2rem;
+
+}
+
+.start video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .button {
@@ -53,7 +78,7 @@ header{
 nav {
     position: absolute;
     padding: 0;
-    top: 10px;
+    top: 15px;
     right: 10px;
     z-index: 1000;
 }
@@ -195,4 +220,106 @@ button {
 
 .project__image {
   margin-left: -50%;
+}
+
+iframe{
+  width: 500px;
+}
+
+#map {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.marker {
+  background-color: rgb(157, 53, 238);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Estilo para el popup */
+.mapboxgl-popup {
+  max-width: none;
+  /* Permitir que el popup se ajuste al contenido */
+}
+.mapboxgl-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  width: auto;
+  height: auto;
+
+}
+
+
+/* Estilo para el indicador de carga */
+.loading-indicator {
+  display: none;
+  /* Oculto por defecto */
+  text-align: center;
+  margin-top: 10px;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.slide {
+  display: none;
+  flex: 0 0 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide.active {
+  display: flex;
+}
+
+video {
+  width: 100%!important;
+  /*height: 100%!important;*/
+  max-width: 800px;
+  object-fit: contain;
+
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.carousel-controls button {
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  background-color: rgba(102, 51, 153, 0.033);
+}
+
+.info {
+  color: white;
+  width: 50%; /* Ajusta el ancho según lo necesites */
+  margin: 10% auto; /* Centra el contenedor */
+  padding: 20px; /* Añade espacio alrededor del contenido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
