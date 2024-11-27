@@ -124,6 +124,7 @@ button {
     justify-content: center;
     align-items: center;
     text-align: justify;
+    gap: 20px;
 }
 
 iframe{
